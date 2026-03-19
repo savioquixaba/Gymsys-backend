@@ -1,4 +1,4 @@
-package Quixaba.dev.Gymsys;
+package Quixaba.dev.Gymsys.Models;
 
 public enum TipoPlano {
     // sempre em maiusculo
