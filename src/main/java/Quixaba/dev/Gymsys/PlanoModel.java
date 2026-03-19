@@ -5,7 +5,7 @@ import java.math.BigDecimal;
 public class PlanoModel {
 
     private Long id;
-    private Enum tipoPlano;
+    private TipoPlano tipoPlano;
     private BigDecimal preco;
     private Integer duracaoDias;
 }
