@@ -4,6 +4,8 @@ import Quixaba.dev.Gymsys.Models.AlunoModel;
 import Quixaba.dev.Gymsys.Repository.AlunoRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class AlunoService {
 
@@ -17,5 +19,10 @@ public class AlunoService {
     public AlunoModel criarAluno (AlunoModel alunoModel){
         AlunoModel aluno =  alunoRepository.save(alunoModel);
         return aluno;
+    }
+
+    public List<AlunoModel> listarTodosAlunos(){
+        List<AlunoModel> alunos = alunoRepository.findAll();
+        return alunos;
     }
 }
