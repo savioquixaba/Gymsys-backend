@@ -19,5 +19,5 @@ public class AlunoDTO {
     private String cpf;
     private String matricula;
     private LocalDate dataNascimento;
-    private TurmaDTO turma;
+    private Long turmaId;
 }
