@@ -52,6 +52,9 @@ public class AlunoService {
                 .orElse(null);
     }
 
+    public void deletarAlunoPorId(Long id){
+        alunoRepository.deleteById(id);
+    }
 
 
 }
