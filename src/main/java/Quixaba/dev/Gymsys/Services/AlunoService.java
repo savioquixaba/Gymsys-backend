@@ -52,9 +52,30 @@ public class AlunoService {
                 .orElse(null);
     }
 
-    public void deletarAlunoPorId(Long id){
-        alunoRepository.deleteById(id);
+    public String deletarAlunoPorId(Long id){
+        Optional<AlunoModel> alunoExiste = alunoRepository.findById(id);
+        if (alunoExiste.isPresent()){
+           alunoRepository.deleteById(id);
+           return "Aluno deletado com Sucesso";
+        }throw new RuntimeException("Aluno não existe para ser deletado");
+
+
     }
 
+    public AlunoDTO AlterarAlunoPorId(Long id, AlunoDTO alunoDTO ){
+
+        TurmaModel idTurma = turmaRepository.findById(alunoDTO.getTurmaId()).orElse(null);
+        Optional<AlunoModel> alunoExiste = alunoRepository.findById(id);
+        if (alunoExiste.isPresent()){
+            AlunoModel alunoAtualizado = alunoMapper.mapToModel(alunoDTO);
+            alunoAtualizado.setTurma(idTurma);
+            alunoAtualizado.setId(id);
+            AlunoModel alunoSalvo = alunoRepository.save(alunoAtualizado);
+            return alunoMapper.mapToDTO(alunoSalvo);
+
+        }throw new RuntimeException("Aluno não existe");
+
+
+    }
 
 }
