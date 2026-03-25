@@ -1,6 +1,7 @@
 package Quixaba.dev.Gymsys.Models;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -21,6 +22,7 @@ public class TurmaModel {
     private String nome;
 
     //Indica que Turma não é o lado dominante da relação
+    @JsonIgnore //evita serialização
     @OneToMany(mappedBy = "turma")
     private List<AlunoModel>alunos;
 
