@@ -10,6 +10,7 @@ import Quixaba.dev.Gymsys.Repository.TurmaRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -42,4 +43,15 @@ public class AlunoService {
                 .map(aluno -> alunoMapper.mapToDTO(aluno))
                 .collect(Collectors.toList());
     }
+
+    public AlunoDTO listarAlunoPorId(Long id){
+       //sempre que for usar o repositorio ele retorna o Model da entidade
+        Optional<AlunoModel> alunoPorId = alunoRepository.findById(id);
+        //Model to DTO
+        return alunoPorId.map(aluno -> alunoMapper.mapToDTO(aluno))
+                .orElse(null);
+    }
+
+
+
 }
