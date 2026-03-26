@@ -12,5 +12,5 @@ public class TurmaDTO {
 
     private Long id;
     private String nome;
-
+    private Long idInstrutor;
 }
