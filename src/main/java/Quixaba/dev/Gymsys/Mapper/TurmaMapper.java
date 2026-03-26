@@ -5,7 +5,7 @@ import Quixaba.dev.Gymsys.Models.TurmaModel;
 
 public class TurmaMapper {
 
-    public TurmaModel mapToDto(TurmaDTO turmaDTO) {
+    public TurmaModel mapToDmodel(TurmaDTO turmaDTO) {
         TurmaModel turmaModel = new TurmaModel();
 
         turmaModel.setNome(turmaDTO.getNome());
@@ -13,7 +13,7 @@ public class TurmaMapper {
         return turmaModel;
     }
 
-    public TurmaDTO mapToModel(TurmaModel turmaModel){
+    public TurmaDTO mapToDto(TurmaModel turmaModel){
         TurmaDTO turmaDTO = new TurmaDTO();
 
         turmaDTO.setId(turmaModel.getId());
