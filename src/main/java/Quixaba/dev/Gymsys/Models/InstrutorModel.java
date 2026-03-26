@@ -1,6 +1,7 @@
 package Quixaba.dev.Gymsys.Models;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -22,6 +23,7 @@ public class InstrutorModel {
     private String cpf;
     private String horario;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "instrutor")
     private List<TurmaModel> turmas;
 }
