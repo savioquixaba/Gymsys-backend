@@ -2,11 +2,13 @@ package Quixaba.dev.Gymsys.Services;
 
 import Quixaba.dev.Gymsys.DTO.TurmaDTO;
 import Quixaba.dev.Gymsys.Mapper.TurmaMapper;
-import Quixaba.dev.Gymsys.Models.AlunoModel;
 import Quixaba.dev.Gymsys.Models.InstrutorModel;
 import Quixaba.dev.Gymsys.Models.TurmaModel;
 import Quixaba.dev.Gymsys.Repository.InstrutorRepository;
 import Quixaba.dev.Gymsys.Repository.TurmaRepository;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class TurmaService {
 
@@ -26,6 +28,13 @@ public class TurmaService {
         turma.setInstrutor(instrutorId);
         turma = turmaRepository.save(turma);
         return turmaMapper.mapToDto(turma);
+    }
+
+    public List<TurmaDTO> listarTodasTurmas(){
+        List<TurmaModel> turmas = turmaRepository.findAll();
+        return turmas.stream()
+                .map(turma -> turmaMapper.mapToDto(turma))
+                .collect(Collectors.toList());
     }
 
 }
