@@ -8,6 +8,7 @@ import Quixaba.dev.Gymsys.Repository.InstrutorRepository;
 import Quixaba.dev.Gymsys.Repository.TurmaRepository;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 public class TurmaService {
@@ -35,6 +36,15 @@ public class TurmaService {
         return turmas.stream()
                 .map(turma -> turmaMapper.mapToDto(turma))
                 .collect(Collectors.toList());
+    }
+
+    public TurmaDTO turmaPorId(Long id){
+        Optional<TurmaModel> turmaPorId = turmaRepository.findById(id);
+        if (turmaPorId.isPresent()){
+            TurmaModel turma = turmaPorId.get();
+            TurmaDTO turmaDTO = turmaMapper.mapToDto(turma);
+            return turmaDTO;
+        }throw new RuntimeException("Turma não existe");
     }
 
 }
