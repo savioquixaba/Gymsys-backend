@@ -47,4 +47,12 @@ public class TurmaService {
         }throw new RuntimeException("Turma não existe");
     }
 
+    public String deletePorId(Long id){
+        Optional<TurmaModel> turmaExiste = turmaRepository.findById(id);
+        if (turmaExiste.isPresent()){
+            turmaRepository.deleteById(id);
+            return "Turma deletada com sucesso";
+        }throw new RuntimeException("Turma não existe");
+    }
+
 }
