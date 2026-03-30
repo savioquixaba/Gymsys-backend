@@ -1,7 +1,6 @@
 package Quixaba.dev.Gymsys.Services;
 
 import Quixaba.dev.Gymsys.DTO.AlunoDTO;
-import Quixaba.dev.Gymsys.DTO.TurmaDTO;
 import Quixaba.dev.Gymsys.Mapper.AlunoMapper;
 import Quixaba.dev.Gymsys.Models.AlunoModel;
 import Quixaba.dev.Gymsys.Models.TurmaModel;
