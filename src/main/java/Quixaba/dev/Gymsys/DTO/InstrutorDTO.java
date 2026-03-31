@@ -13,5 +13,6 @@ public class InstrutorDTO {
     private String nome;
     private String cpf;
     private String horario;
+    private Long idTurma;
 
 }
