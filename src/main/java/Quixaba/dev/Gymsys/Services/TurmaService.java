@@ -25,7 +25,7 @@ public class TurmaService {
     }
 
     public TurmaDTO criarTurma(TurmaDTO turmaDTO){
-        InstrutorModel instrutorId = instrutorRepository.findById(turmaDTO.getIdInstrutor()).orElse(null);
+        InstrutorModel instrutorId = instrutorRepository.findById(turmaDTO.getIdInstrutor()).orElseThrow(() -> new RuntimeException("Instrutor não existe, digite um valido!"));
         TurmaModel turma = turmaMapper.mapToDmodel(turmaDTO);
         turma.setInstrutor(instrutorId);
         turma = turmaRepository.save(turma);
@@ -40,12 +40,9 @@ public class TurmaService {
     }
 
     public TurmaDTO turmaPorId(Long id){
-        Optional<TurmaModel> turmaPorId = turmaRepository.findById(id);
-        if (turmaPorId.isPresent()){
-            TurmaModel turma = turmaPorId.get();
-            TurmaDTO turmaDTO = turmaMapper.mapToDto(turma);
-            return turmaDTO;
-        }throw new RuntimeException("Turma não existe");
+        TurmaModel turma = turmaRepository.findById(id).orElseThrow(() -> new RuntimeException("ID de Turma Invalido!"));
+
+        return turmaMapper.mapToDto(turma);
     }
 
     public String deletePorId(Long id){
@@ -66,6 +63,5 @@ public class TurmaService {
         TurmaModel turmaAlterada = turmaRepository.save(turmaExiste);
         return turmaMapper.mapToDto(turmaAlterada);
         }
-
 
 }
