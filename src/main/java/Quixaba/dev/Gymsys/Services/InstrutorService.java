@@ -8,6 +8,8 @@ import Quixaba.dev.Gymsys.Repository.InstrutorRepository;
 import Quixaba.dev.Gymsys.Repository.TurmaRepository;
 
 import java.util.List;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
 
 public class InstrutorService {
 
@@ -31,6 +33,14 @@ public class InstrutorService {
         InstrutorModel salvo = instrutorRepository.save(instrutor);
         return instrutorMapper.mapToDto(salvo);
     }
+
+    public List<InstrutorDTO> listarTodos(){
+        List<InstrutorModel> instrutores = instrutorRepository.findAll();
+        return instrutores.stream()
+                .map(instrutor -> instrutorMapper.mapToDto(instrutor))
+                .collect(Collectors.toList());
+    }
+
 
 }
 
