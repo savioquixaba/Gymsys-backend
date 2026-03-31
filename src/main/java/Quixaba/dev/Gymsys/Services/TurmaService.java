@@ -1,6 +1,6 @@
 package Quixaba.dev.Gymsys.Services;
 
-import Quixaba.dev.Gymsys.DTO.AlunoDTO;
+
 import Quixaba.dev.Gymsys.DTO.TurmaDTO;
 import Quixaba.dev.Gymsys.Mapper.TurmaMapper;
 import Quixaba.dev.Gymsys.Models.InstrutorModel;
@@ -9,7 +9,6 @@ import Quixaba.dev.Gymsys.Repository.InstrutorRepository;
 import Quixaba.dev.Gymsys.Repository.TurmaRepository;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 public class TurmaService {
