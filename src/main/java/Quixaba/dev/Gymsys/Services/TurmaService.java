@@ -1,5 +1,6 @@
 package Quixaba.dev.Gymsys.Services;
 
+import Quixaba.dev.Gymsys.DTO.AlunoDTO;
 import Quixaba.dev.Gymsys.DTO.TurmaDTO;
 import Quixaba.dev.Gymsys.Mapper.TurmaMapper;
 import Quixaba.dev.Gymsys.Models.InstrutorModel;
@@ -53,6 +54,19 @@ public class TurmaService {
             turmaRepository.deleteById(id);
             return "Turma deletada com sucesso";
         }throw new RuntimeException("Turma não existe");
+    }
+
+    public TurmaDTO alterarTurma(Long id, TurmaDTO turmaDTO){
+        Optional<TurmaModel> turmaExiste = turmaRepository.findById(id);
+        Optional<InstrutorModel> instrutorId = instrutorRepository.findById(turmaDTO.getIdInstrutor());
+
+        if (turmaExiste.isPresent() && instrutorId.isPresent()){
+            TurmaModel turmaAtualizada = turmaMapper.mapToDmodel(turmaDTO);
+            turmaAtualizada.setId(id);
+            turmaAtualizada.setInstrutor(instrutorId.get());
+            TurmaModel turmaSalva = turmaRepository.save(turmaAtualizada);
+            return turmaMapper.mapToDto(turmaSalva);
+        }throw new RuntimeException("Dados inconsistentes verificar por gentileza");
     }
 
 }
