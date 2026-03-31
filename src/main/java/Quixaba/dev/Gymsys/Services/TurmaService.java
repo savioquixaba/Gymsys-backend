@@ -57,16 +57,15 @@ public class TurmaService {
     }
 
     public TurmaDTO alterarTurma(Long id, TurmaDTO turmaDTO){
-        Optional<TurmaModel> turmaExiste = turmaRepository.findById(id);
-        Optional<InstrutorModel> instrutorId = instrutorRepository.findById(turmaDTO.getIdInstrutor());
+        TurmaModel turmaExiste = turmaRepository.findById(id).orElseThrow(() -> new RuntimeException("Turma não existe"));
+        InstrutorModel instrutorId = instrutorRepository.findById(turmaDTO.getIdInstrutor()).orElseThrow(() -> new RuntimeException("Instrutor não existe"));
 
-        if (turmaExiste.isPresent() && instrutorId.isPresent()){
-            TurmaModel turmaAtualizada = turmaMapper.mapToDmodel(turmaDTO);
-            turmaAtualizada.setId(id);
-            turmaAtualizada.setInstrutor(instrutorId.get());
-            TurmaModel turmaSalva = turmaRepository.save(turmaAtualizada);
-            return turmaMapper.mapToDto(turmaSalva);
-        }throw new RuntimeException("Dados inconsistentes verificar por gentileza");
-    }
+        turmaExiste.setNome(turmaDTO.getNome());
+        turmaExiste.setInstrutor(instrutorId);
+
+        TurmaModel turmaAlterada = turmaRepository.save(turmaExiste);
+        return turmaMapper.mapToDto(turmaAlterada);
+        }
+
 
 }
