@@ -41,6 +41,11 @@ public class InstrutorService {
                 .collect(Collectors.toList());
     }
 
+    public InstrutorDTO listarPorId(Long id){
+        InstrutorModel buscaId = instrutorRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Instrutor com ID" + id + "não existe!"));
+        return instrutorMapper.mapToDto(buscaId);
+    }
 
 }
 
