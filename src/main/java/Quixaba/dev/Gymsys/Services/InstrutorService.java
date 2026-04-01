@@ -8,7 +8,6 @@ import Quixaba.dev.Gymsys.Repository.InstrutorRepository;
 import Quixaba.dev.Gymsys.Repository.TurmaRepository;
 
 import java.util.List;
-import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
 public class InstrutorService {
@@ -60,5 +59,12 @@ public class InstrutorService {
         return instrutorMapper.mapToDto(salvo);
     }
 
+    public String deletePorId(Long id){
+        InstrutorModel idExiste = instrutorRepository
+                .findById(id)
+                .orElseThrow(() -> new RuntimeException("Instrutor com ID:" + id + "Não existe, digite um valido!"));
+        instrutorRepository.deleteById(id);
+        return "Instrutor deletado com sucesso!";
+    }
 }
 
