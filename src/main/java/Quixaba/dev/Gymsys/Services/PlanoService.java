@@ -35,4 +35,10 @@ public class PlanoService {
                 .collect(Collectors.toList());
     }
 
+    public PlanoDTO listarPorId(Long id){
+        PlanoModel planoExiste = planoRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Plano com id: " + id + " não existe"));
+        return planoMapper.mapToDto(planoExiste);
+    }
+
 }
