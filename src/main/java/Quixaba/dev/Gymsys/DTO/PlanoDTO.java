@@ -16,6 +16,4 @@ public class PlanoDTO {
     private TipoPlano tipoPlano;
     private BigDecimal preco;
     private Integer duracaoDias;
-    private Long idContrat;
-
 }
