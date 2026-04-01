@@ -54,4 +54,11 @@ public class PlanoService {
         return planoMapper.mapToDto(salvo);
     }
 
+    public String deletarPlano (Long id){
+        PlanoModel existe = planoRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Plano com ID: " + id + " não existe!"));
+        planoRepository.deleteById(id);
+        return "Plano deletado com sucesso!";
+    }
+
 }
