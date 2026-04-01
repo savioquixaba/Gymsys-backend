@@ -47,5 +47,18 @@ public class InstrutorService {
         return instrutorMapper.mapToDto(buscaId);
     }
 
+    public InstrutorDTO alterarInstrutor (Long id, InstrutorDTO instrutorDTO){
+        InstrutorModel instrutorExiste = instrutorRepository.findById(id).orElseThrow(() -> new RuntimeException("Instrutor não existe!"));
+        TurmaModel turmaExiste = turmaRepository.findById(instrutorDTO.getIdTurma())
+                .orElseThrow(() -> new RuntimeException("Turma com o ID" + instrutorDTO.getIdTurma() + "não existe");
+        List<TurmaModel> lista = List.of(turmaExiste);
+        instrutorExiste.setHorario(instrutorDTO.getHorario());
+        instrutorExiste.setNome(instrutorDTO.getNome());
+        instrutorExiste.setCpf(instrutorDTO.getCpf());
+        instrutorExiste.setTurmas(lista);
+        InstrutorModel salvo = instrutorRepository.save(instrutorExiste);
+        return instrutorMapper.mapToDto(salvo);
+    }
+
 }
 
