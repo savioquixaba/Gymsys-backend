@@ -7,6 +7,9 @@ import Quixaba.dev.Gymsys.Models.PlanoModel;
 import Quixaba.dev.Gymsys.Repository.ContratacaoRepository;
 import Quixaba.dev.Gymsys.Repository.PlanoRepository;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 public class PlanoService {
 
     private PlanoMapper planoMapper;
@@ -24,4 +27,12 @@ public class PlanoService {
         PlanoModel salvo = planoRepository.save(plano);
         return planoMapper.mapToDto(salvo);
     }
+
+    public List<PlanoDTO> listarTodos(){
+        List<PlanoModel> listar = planoRepository.findAll();
+        return listar.stream()
+                .map(plano -> planoMapper.mapToDto(plano))
+                .collect(Collectors.toList());
+    }
+
 }
