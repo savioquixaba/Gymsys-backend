@@ -41,4 +41,17 @@ public class PlanoService {
         return planoMapper.mapToDto(planoExiste);
     }
 
+    public PlanoDTO alterarPlano(Long id, PlanoDTO planoDTO){
+        PlanoModel planoExiste = planoRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Plano com o ID: " + id + " não existe no banco de dados!"));
+
+        //seta manualmente os campos que precisam ser alterados os outros permanecem intocados;
+        planoExiste.setTipoPlano(planoDTO.getTipoPlano());
+        planoExiste.setPreco(planoDTO.getPreco());
+        planoExiste.setDuracaoDias(planoDTO.getDuracaoDias());
+
+        PlanoModel salvo = planoRepository.save(planoExiste);
+        return planoMapper.mapToDto(salvo);
+    }
+
 }
