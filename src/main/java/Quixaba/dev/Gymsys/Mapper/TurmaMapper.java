@@ -2,7 +2,9 @@ package Quixaba.dev.Gymsys.Mapper;
 
 import Quixaba.dev.Gymsys.DTO.TurmaDTO;
 import Quixaba.dev.Gymsys.Models.TurmaModel;
+import org.springframework.stereotype.Component;
 
+@Component
 public class TurmaMapper {
 
     public TurmaModel mapToDmodel(TurmaDTO turmaDTO) {

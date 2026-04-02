@@ -2,7 +2,9 @@ package Quixaba.dev.Gymsys.Mapper;
 
 import Quixaba.dev.Gymsys.DTO.PlanoDTO;
 import Quixaba.dev.Gymsys.Models.PlanoModel;
+import org.springframework.stereotype.Component;
 
+@Component
 public class PlanoMapper {
 
     public PlanoModel mapToModel (PlanoDTO planoDTO){

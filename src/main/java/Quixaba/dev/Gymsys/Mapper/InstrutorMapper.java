@@ -2,7 +2,9 @@ package Quixaba.dev.Gymsys.Mapper;
 
 import Quixaba.dev.Gymsys.DTO.InstrutorDTO;
 import Quixaba.dev.Gymsys.Models.InstrutorModel;
+import org.springframework.stereotype.Component;
 
+@Component
 public class InstrutorMapper {
 
  public InstrutorModel mapToModel (InstrutorDTO instrutorDTO){
