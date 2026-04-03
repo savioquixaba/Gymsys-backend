@@ -8,6 +8,8 @@ import Quixaba.dev.Gymsys.Models.PlanoModel;
 import Quixaba.dev.Gymsys.Repository.AlunoRepository;
 import Quixaba.dev.Gymsys.Repository.ContratacaoRepository;
 import Quixaba.dev.Gymsys.Repository.PlanoRepository;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class ContratacaoService {
 
@@ -35,4 +37,11 @@ public class ContratacaoService {
         return contratacaoMapper.mapToDTO(salvo);
     }
 
+    public List<ContratacaoDTO> listarContratacao(){
+        List<ContratacaoModel> lista = contratacaoRepository.findAll();
+        return lista.stream()
+                .map(contratacao -> contratacaoMapper
+                        .mapToDTO(contratacao))
+                .toList();
+    }
 }
