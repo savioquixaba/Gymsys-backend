@@ -44,8 +44,16 @@ public class ContratacaoService {
                         .mapToDTO(contratacao))
                 .toList();
     }
+
     public ContratacaoDTO listarPorId(Long id){
         ContratacaoModel existeId = contratacaoRepository.findById(id).orElseThrow(() -> new RuntimeException("ID não encontrado"));
         return contratacaoMapper.mapToDTO(existeId);
+    }
+
+    public String deleteContratacao(Long id){
+        ContratacaoModel existe = contratacaoRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Contratação não existe"));
+        contratacaoRepository.deleteById(id);
+        return "Contratação excluida com sucesso!";
     }
 }
