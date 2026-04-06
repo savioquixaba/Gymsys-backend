@@ -56,4 +56,19 @@ public class ContratacaoService {
         contratacaoRepository.deleteById(id);
         return "Contratação excluida com sucesso!";
     }
+
+    public ContratacaoDTO alterarContratacao(Long id, ContratacaoDTO contratacaoDTO){
+        ContratacaoModel contratacao = contratacaoRepository.findById(id).orElseThrow(() -> new RuntimeException("Contratação não existe"));
+        PlanoModel planoExiste = planoRepository.findById(contratacaoDTO.getIdPlano()).orElseThrow(() -> new RuntimeException("Plano não existe"));
+        AlunoModel alunoExiste = alunoRepository.findById(contratacaoDTO.getIdAluno()).orElseThrow(() -> new RuntimeException("Aluno não existe"));
+
+        contratacao.setAluno(alunoExiste);
+        contratacao.setPlano(planoExiste);
+        contratacao.setDataFinal(contratacaoDTO.getDataFinal());
+        contratacao.setDataInicio(contratacaoDTO.getDataInicio());
+
+        ContratacaoModel salvo = contratacaoRepository.save(contratacao);
+        return contratacaoMapper.mapToDTO(contratacao);
+
+    }
 }
