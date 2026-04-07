@@ -5,10 +5,9 @@ import Quixaba.dev.Gymsys.Services.AlunoService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @Slf4j
 @RestController
@@ -30,15 +29,22 @@ public class AlunoController {
         }catch (IllegalArgumentException exception){
             log.error("Erro na criação do aluno, verifique os dados novamente;");
             return ResponseEntity.status(HttpStatus.UNPROCESSABLE_ENTITY).build();
-        }catch (Exception e){
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+        }catch (RuntimeException e){
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
-
     }
 
 
+    @GetMapping("listar-alunos")
+    public ResponseEntity<List<AlunoDTO>> listarAlunos() {
+       try {
+           List<AlunoDTO> lista = alunoService.listarTodosAlunos();
+           if (!lista.isEmpty()) {
+               return ResponseEntity.status(HttpStatus.OK).body(lista);
+           }return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
 
-
-
+       }catch (RuntimeException e){
+          return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+       }
 
 }
