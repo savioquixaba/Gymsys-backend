@@ -24,12 +24,15 @@ public class AlunoController {
     public ResponseEntity<AlunoDTO> criarAluno(@RequestBody AlunoDTO alunoDTO){
         try {
             AlunoDTO novoAluno = alunoService.criarAluno(alunoDTO);
+            log.info("Aluno criado com o id: {}", novoAluno.getId());
             return ResponseEntity.status(HttpStatus.CREATED)
                     .body(novoAluno);
+
         }catch (IllegalArgumentException exception){
             log.error("Erro na criação do aluno, verifique os dados novamente;");
             return ResponseEntity.status(HttpStatus.UNPROCESSABLE_ENTITY).build();
         }catch (RuntimeException e){
+            log.error("Erro no servidor");
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
     }
@@ -40,11 +43,14 @@ public class AlunoController {
         try {
             List<AlunoDTO> lista = alunoService.listarTodosAlunos();
             if (!lista.isEmpty()) {
+                log.info("lista de alunos: {}",lista);
                 return ResponseEntity.status(HttpStatus.OK).body(lista);
             }
+            log.error("Lista vazia");
             return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
 
         } catch (RuntimeException e) {
+            log.error("Erro no servidor");
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
     }
