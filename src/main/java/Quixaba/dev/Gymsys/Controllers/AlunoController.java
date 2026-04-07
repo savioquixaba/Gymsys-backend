@@ -37,14 +37,15 @@ public class AlunoController {
 
     @GetMapping("listar-alunos")
     public ResponseEntity<List<AlunoDTO>> listarAlunos() {
-       try {
-           List<AlunoDTO> lista = alunoService.listarTodosAlunos();
-           if (!lista.isEmpty()) {
-               return ResponseEntity.status(HttpStatus.OK).body(lista);
-           }return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
+        try {
+            List<AlunoDTO> lista = alunoService.listarTodosAlunos();
+            if (!lista.isEmpty()) {
+                return ResponseEntity.status(HttpStatus.OK).body(lista);
+            }
+            return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
 
-       }catch (RuntimeException e){
-          return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
-       }
-
+        } catch (RuntimeException e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
+    }
 }
