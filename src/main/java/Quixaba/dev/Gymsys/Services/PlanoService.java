@@ -6,10 +6,12 @@ import Quixaba.dev.Gymsys.Mapper.PlanoMapper;
 import Quixaba.dev.Gymsys.Models.PlanoModel;
 import Quixaba.dev.Gymsys.Repository.ContratacaoRepository;
 import Quixaba.dev.Gymsys.Repository.PlanoRepository;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
+@Service
 public class PlanoService {
 
     private PlanoMapper planoMapper;

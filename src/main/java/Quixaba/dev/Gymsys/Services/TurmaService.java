@@ -7,10 +7,12 @@ import Quixaba.dev.Gymsys.Models.InstrutorModel;
 import Quixaba.dev.Gymsys.Models.TurmaModel;
 import Quixaba.dev.Gymsys.Repository.InstrutorRepository;
 import Quixaba.dev.Gymsys.Repository.TurmaRepository;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
+@Service
 public class TurmaService {
 
     private TurmaRepository turmaRepository;

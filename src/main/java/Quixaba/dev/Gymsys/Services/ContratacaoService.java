@@ -8,9 +8,12 @@ import Quixaba.dev.Gymsys.Models.PlanoModel;
 import Quixaba.dev.Gymsys.Repository.AlunoRepository;
 import Quixaba.dev.Gymsys.Repository.ContratacaoRepository;
 import Quixaba.dev.Gymsys.Repository.PlanoRepository;
-import java.util.List;
-import java.util.stream.Collectors;
+import org.springframework.stereotype.Service;
 
+import java.util.List;
+
+
+@Service
 public class ContratacaoService {
 
     private AlunoRepository alunoRepository;
