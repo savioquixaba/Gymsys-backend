@@ -73,11 +73,11 @@ public class AlunoController {
         try {
             AlunoDTO aluno = alunoService.AlterarAlunoPorId(id, alunoDTO);
             if (aluno == null ){
-                log.error("Aluno é nulo");
+                log.error("Aluno é nulo", alunoDTO.getId());
                 return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
             }return ResponseEntity.status(HttpStatus.OK).body(aluno);
         } catch (Exception e) {
-            log.error("Erro no servidor");
+            log.error("Erro no servidor", e);
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
     }
