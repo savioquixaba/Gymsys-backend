@@ -81,4 +81,19 @@ public class AlunoController {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
     }
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<String> deleteAluno(@PathVariable Long id){
+       try {
+           log.info("Aluno deletado com ID", id);
+           String aluno = alunoService.deletarAlunoPorId(id);
+           return ResponseEntity.status(HttpStatus.OK).body(aluno);
+       }catch (RuntimeException e){
+           log.error("Aluno com ID" + id + "não encontrado");
+           return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+       }catch (Exception e){
+           log.error("Erro no servidor", e);
+           return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("erro no servidor");
+       }
+    }
+
 }
