@@ -38,7 +38,7 @@ public class AlunoController {
     }
 
 
-    @GetMapping("/listar-alunos")
+    @GetMapping("/listar")
     public ResponseEntity<List<AlunoDTO>> listarAlunos() {
         try {
             List<AlunoDTO> lista = alunoService.listarTodosAlunos();
@@ -55,7 +55,7 @@ public class AlunoController {
         }
     }
 
-    @GetMapping("/buscar/{id}")
+    @GetMapping("/listar/{id}")
     public ResponseEntity<AlunoDTO> buscarPorId(@PathVariable Long id){
         try {
             AlunoDTO aluno = alunoService.listarAlunoPorId(id);
