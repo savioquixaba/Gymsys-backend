@@ -38,7 +38,7 @@ public class AlunoController {
     }
 
 
-    @GetMapping("listar-alunos")
+    @GetMapping("/listar-alunos")
     public ResponseEntity<List<AlunoDTO>> listarAlunos() {
         try {
             List<AlunoDTO> lista = alunoService.listarTodosAlunos();
@@ -50,6 +50,20 @@ public class AlunoController {
             return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
 
         } catch (RuntimeException e) {
+            log.error("Erro no servidor");
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<AlunoDTO> buscarPorId(@PathVariable Long id){
+        try {
+            AlunoDTO aluno = alunoService.listarAlunoPorId(id);
+            if (aluno == null){
+                log.error("Aluno retornou nulo");
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+            }return ResponseEntity.status(HttpStatus.OK).body(aluno);
+        }catch (RuntimeException e){
             log.error("Erro no servidor");
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
