@@ -49,4 +49,20 @@ public class TurmaController {
         }
     }
 
+    @GetMapping("/listar/{id}")
+    public ResponseEntity<?> buscarPorId(@PathVariable Long id){
+        try {
+            TurmaDTO turma = turmaService.turmaPorId(id);
+            log.info("turma  :" + id);
+            return ResponseEntity.status(HttpStatus.OK).body(turma);
+        }catch (RuntimeException e){
+            log.error("Erro:",e);
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+        }catch (Exception e){
+            log.error("Erro de servidor",e);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
+
+    }
+
 }
