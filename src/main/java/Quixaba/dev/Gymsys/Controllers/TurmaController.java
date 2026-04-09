@@ -3,7 +3,6 @@ package Quixaba.dev.Gymsys.Controllers;
 import Quixaba.dev.Gymsys.DTO.TurmaDTO;
 import Quixaba.dev.Gymsys.Services.TurmaService;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -80,4 +79,19 @@ public class TurmaController {
 
     }
 
+    @DeleteMapping("/deletar/{id}")
+    public ResponseEntity<?> deletarTurma(@PathVariable Long id){
+        try {
+            String existe = turmaService.deletePorId(id);
+            log.info("Turma com ID: {} deletado com sucesso!", id );
+            return ResponseEntity.status(HttpStatus.OK).body(existe);
+        }catch (RuntimeException e){
+            log.error("Erro: ",e );
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+        }catch (Exception e){
+            log.error("Erro de servidor",e);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
+
+    }
 }
