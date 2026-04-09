@@ -65,4 +65,19 @@ public class TurmaController {
 
     }
 
+    @PutMapping("/alterar/{id}")
+    public ResponseEntity<?> alterarTurma(@PathVariable Long id, TurmaDTO turmaDTO){
+        try {
+            TurmaDTO turmaAlterada = turmaService.alterarTurma(id, turmaDTO);
+            return ResponseEntity.status(HttpStatus.OK).body(turmaAlterada);
+        }catch (RuntimeException e){
+            log.error("Erro: ",e );
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+        } catch (Exception e) {
+            log.error("Erro de servidor",e);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
+
+    }
+
 }
