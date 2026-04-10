@@ -5,10 +5,7 @@ import Quixaba.dev.Gymsys.Services.PlanoService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -52,4 +49,20 @@ public class PlanoController {
         }
 
     }
+
+    @GetMapping("/listar/{id}")
+    public ResponseEntity<?> listarPorId(@PathVariable Long id){
+        try {
+            PlanoDTO plano = planoService.listarPorId(id);
+            log.info("Plano listado: {}", plano);
+            return ResponseEntity.status(HttpStatus.OK).body(plano);
+        }catch (RuntimeException e){
+            log.error("Erro:",e);
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+        }catch (Exception e){
+            log.error("Erro de servidor!");
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
+    }
+
 }
