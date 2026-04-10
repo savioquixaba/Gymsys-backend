@@ -21,7 +21,7 @@ public class PlanoController {
     }
 
     @PostMapping("/criar")
-    public ResponseEntity<PlanoDTO> criarPlano(PlanoDTO planoDTO){
+    public ResponseEntity<PlanoDTO> criarPlano(@RequestBody PlanoDTO planoDTO){
         try {
             PlanoDTO novoPlano = planoService.criarPlano(planoDTO);
             return ResponseEntity.status(HttpStatus.OK).body(novoPlano);
@@ -63,6 +63,22 @@ public class PlanoController {
             log.error("Erro de servidor!");
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
+    }
+
+    @PutMapping("/alterar/{id}")
+    public ResponseEntity<?> alterarPlano(@PathVariable Long id, @RequestBody PlanoDTO planoDTO){
+        try {
+            PlanoDTO alterado = planoService.alterarPlano(id, planoDTO);
+            log.info("Aluno alterado: {}",alterado);
+            return ResponseEntity.status(HttpStatus.OK).body(alterado);
+        } catch (RuntimeException e) {
+            log.error("Erro: ",e);
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+        } catch (Exception e) {
+            log.error("Erro do servidor");
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
+
     }
 
 }
