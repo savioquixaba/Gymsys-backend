@@ -69,7 +69,7 @@ public class PlanoController {
     public ResponseEntity<?> alterarPlano(@PathVariable Long id, @RequestBody PlanoDTO planoDTO){
         try {
             PlanoDTO alterado = planoService.alterarPlano(id, planoDTO);
-            log.info("Aluno alterado: {}",alterado);
+            log.info("plano alterado: {}",alterado);
             return ResponseEntity.status(HttpStatus.OK).body(alterado);
         } catch (RuntimeException e) {
             log.error("Erro: ",e);
@@ -81,4 +81,19 @@ public class PlanoController {
 
     }
 
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<?> deletePlano(@PathVariable Long id){
+        try {
+            log.info("plano que vai ser deletado: {}", id);
+            String deletar = planoService.deletarPlano(id);
+            log.info("plano deletado: {}",deletar);
+            return ResponseEntity.status(HttpStatus.OK).body(deletar);
+        } catch (RuntimeException e) {
+            log.error("Erro: ",e);
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+        }catch (Exception e){
+            log.error("Erro do servidor");
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
+    }
 }
