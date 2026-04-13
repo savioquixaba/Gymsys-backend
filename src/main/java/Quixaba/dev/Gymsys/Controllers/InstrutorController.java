@@ -49,11 +49,26 @@ public class InstrutorController {
     public ResponseEntity<?> listarPorId(@PathVariable Long id){
         try {
             InstrutorDTO listar = instrutorService.listarPorId(id);
+            log.info("instrutor procurado: {}",listar);
             return ResponseEntity.status(HttpStatus.OK).body(listar);
         }catch (RuntimeException e) {
             log.error("Instrutor não encontrado");
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
         }catch (Exception e){
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
+    }
+
+    @PutMapping("/alterar/{id}")
+    public ResponseEntity<?> alterarInstrutor(@PathVariable Long id, InstrutorDTO instrutorDTO){
+        try {
+            InstrutorDTO alterado = instrutorService.alterarInstrutor(id,instrutorDTO);
+            log.info("Id a ser alterado: {} ",id);
+            return ResponseEntity.status(HttpStatus.OK).body(alterado);
+        } catch (RuntimeException e) {
+            log.error("ID NÃO ENCONTRADO");
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+        } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
     }
