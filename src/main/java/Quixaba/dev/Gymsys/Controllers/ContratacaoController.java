@@ -75,6 +75,7 @@ public class ContratacaoController {
     public ResponseEntity<?> deletarContratacao(@PathVariable Long id){
          try {
              String deletar = contratacaoService.deleteContratacao(id);
+             log.info("deletado: {}",deletar);
              return ResponseEntity.status(HttpStatus.OK).body(deletar);
          } catch (RuntimeException e) {
              return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
