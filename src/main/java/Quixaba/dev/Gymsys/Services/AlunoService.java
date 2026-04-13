@@ -27,13 +27,13 @@ public class AlunoService {
 
     //Cria metodo para salvar o Aluno.falta validações
     public AlunoDTO criarAluno (AlunoDTO alunoDTO){
-
-        TurmaModel idTurma =  turmaRepository.findById(alunoDTO.getTurmaId()).orElse(null);
         AlunoModel aluno =  alunoMapper.mapToModel(alunoDTO);
-        aluno.setTurma(idTurma);
-        // recebe o DTO
-        aluno = alunoRepository.save(aluno); //SALVA O OBJETO
-        return alunoMapper.mapToDTO(aluno); // RETORNA COMO DTO
+        if (alunoDTO.getTurmaId() != null){
+            TurmaModel idTurma =  turmaRepository.findById(alunoDTO.getTurmaId()).orElse(null);
+            aluno.setTurma(idTurma);
+        }
+        aluno = alunoRepository.save(aluno); //
+        return alunoMapper.mapToDTO(aluno); //
     }
 
     public List<AlunoDTO> listarTodosAlunos(){
