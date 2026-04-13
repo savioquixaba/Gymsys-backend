@@ -58,4 +58,16 @@ public class ContratacaoController {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
     }
+
+    @PutMapping("/alterar/{id}")
+    public ResponseEntity<?> alterarContratacao(Long id, ContratacaoDTO contratacaoDTO){
+        try {
+            ContratacaoDTO alterar = contratacaoService.alterarContratacao(id, contratacaoDTO);
+            return ResponseEntity.status(HttpStatus.OK).body(alterar);
+        } catch (RuntimeException e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+        }catch (Exception e){
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
+    }
 }
