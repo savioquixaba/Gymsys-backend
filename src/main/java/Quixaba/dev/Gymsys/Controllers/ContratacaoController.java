@@ -70,4 +70,16 @@ public class ContratacaoController {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
     }
+
+    @DeleteMapping("/deletar/{id}")
+    public ResponseEntity<?> deletarContratacao(@PathVariable Long id){
+         try {
+             String deletar = contratacaoService.deleteContratacao(id);
+             return ResponseEntity.status(HttpStatus.OK).body(deletar);
+         } catch (RuntimeException e) {
+             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+         } catch (Exception e) {
+             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+         }
+    }
 }
