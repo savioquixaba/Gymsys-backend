@@ -44,4 +44,17 @@ public class InstrutorController {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
     }
+
+    @GetMapping("/listar/{id}")
+    public ResponseEntity<?> listarPorId(@PathVariable Long id){
+        try {
+            InstrutorDTO listar = instrutorService.listarPorId(id);
+            return ResponseEntity.status(HttpStatus.OK).body(listar);
+        }catch (RuntimeException e) {
+            log.error("Instrutor não encontrado");
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+        }catch (Exception e){
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
+    }
 }
