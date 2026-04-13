@@ -72,4 +72,18 @@ public class InstrutorController {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
     }
+
+    @DeleteMapping("/deletar/{id}")
+    public ResponseEntity<?> deletar(@PathVariable Long id){
+        try {
+            String deletado = instrutorService.deletePorId(id);
+            log.info("Id a ser deletado: {} ",id);
+            return ResponseEntity.status(HttpStatus.OK).body(deletado);
+        } catch (RuntimeException e) {
+            log.error("ID NÃO ENCONTRADO");
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
+    }
 }
