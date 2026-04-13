@@ -60,7 +60,7 @@ public class ContratacaoController {
     }
 
     @PutMapping("/alterar/{id}")
-    public ResponseEntity<?> alterarContratacao(Long id, ContratacaoDTO contratacaoDTO){
+    public ResponseEntity<?> alterarContratacao(@PathVariable Long id, ContratacaoDTO contratacaoDTO){
         try {
             ContratacaoDTO alterar = contratacaoService.alterarContratacao(id, contratacaoDTO);
             return ResponseEntity.status(HttpStatus.OK).body(alterar);
