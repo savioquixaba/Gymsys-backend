@@ -50,7 +50,7 @@ public class AlunoController {
             return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
 
         } catch (RuntimeException e) {
-            log.error("Erro no servidor");
+            log.error("Erro no servidor: ",e);
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
     }
