@@ -1,6 +1,7 @@
 package Quixaba.dev.Gymsys.Controllers;
 
 import Quixaba.dev.Gymsys.DTO.AlunoDTO;
+import Quixaba.dev.Gymsys.Documentacao.AlunoOpenAPI;
 import Quixaba.dev.Gymsys.Services.AlunoService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -12,7 +13,7 @@ import java.util.List;
 @Slf4j
 @RestController
 @RequestMapping("/aluno")
-public class AlunoController {
+public class AlunoController implements AlunoOpenAPI {
 
     private AlunoService alunoService;
 

@@ -1,6 +1,7 @@
 package Quixaba.dev.Gymsys.Controllers;
 
 import Quixaba.dev.Gymsys.DTO.PlanoDTO;
+import Quixaba.dev.Gymsys.Documentacao.PlanoOpenAPI;
 import Quixaba.dev.Gymsys.Services.PlanoService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -12,7 +13,7 @@ import java.util.List;
 @Slf4j
 @RestController
 @RequestMapping("/plano")
-public class PlanoController {
+public class PlanoController implements PlanoOpenAPI {
 
     private PlanoService planoService;
 

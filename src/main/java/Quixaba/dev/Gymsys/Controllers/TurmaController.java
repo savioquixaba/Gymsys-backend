@@ -1,6 +1,7 @@
 package Quixaba.dev.Gymsys.Controllers;
 
 import Quixaba.dev.Gymsys.DTO.TurmaDTO;
+import Quixaba.dev.Gymsys.Documentacao.TurmaOpenAPI;
 import Quixaba.dev.Gymsys.Services.TurmaService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -12,7 +13,7 @@ import java.util.List;
 @Slf4j
 @RestController
 @RequestMapping("/turma")
-public class TurmaController {
+public class TurmaController implements TurmaOpenAPI {
 
     private TurmaService turmaService;
 

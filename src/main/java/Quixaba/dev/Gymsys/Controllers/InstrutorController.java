@@ -1,6 +1,7 @@
 package Quixaba.dev.Gymsys.Controllers;
 
 import Quixaba.dev.Gymsys.DTO.InstrutorDTO;
+import Quixaba.dev.Gymsys.Documentacao.InstrutorOpenAPI;
 import Quixaba.dev.Gymsys.Services.InstrutorService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -12,7 +13,7 @@ import java.util.List;
 @Slf4j
 @RestController
 @RequestMapping("/instrutor")
-public class InstrutorController {
+public class InstrutorController implements InstrutorOpenAPI {
 
     private InstrutorService instrutorService;
 

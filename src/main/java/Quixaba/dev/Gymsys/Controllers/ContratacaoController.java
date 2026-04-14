@@ -1,6 +1,7 @@
 package Quixaba.dev.Gymsys.Controllers;
 
 import Quixaba.dev.Gymsys.DTO.ContratacaoDTO;
+import Quixaba.dev.Gymsys.Documentacao.ContratacaoOpenAPI;
 import Quixaba.dev.Gymsys.Services.ContratacaoService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -12,7 +13,7 @@ import java.util.List;
 @Slf4j
 @RestController
 @RequestMapping("/contratacao")
-public class ContratacaoController {
+public class ContratacaoController implements ContratacaoOpenAPI {
 
     private ContratacaoService contratacaoService;
 
