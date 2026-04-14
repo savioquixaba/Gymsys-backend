@@ -8,6 +8,7 @@ import Quixaba.dev.Gymsys.Repository.InstrutorRepository;
 import Quixaba.dev.Gymsys.Repository.TurmaRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -54,7 +55,7 @@ public class InstrutorService {
         InstrutorModel instrutorExiste = instrutorRepository.findById(id).orElseThrow(() -> new RuntimeException("Instrutor não existe!"));
         TurmaModel turmaExiste = turmaRepository.findById(instrutorDTO.getIdTurma())
                 .orElseThrow(() -> new RuntimeException("Turma com o ID" + instrutorDTO.getIdTurma() + "não existe"));
-        List<TurmaModel> lista = List.of(turmaExiste);
+        List<TurmaModel> lista = new ArrayList<>(List.of(turmaExiste));
         instrutorExiste.setHorario(instrutorDTO.getHorario());
         instrutorExiste.setNome(instrutorDTO.getNome());
         instrutorExiste.setCpf(instrutorDTO.getCpf());
