@@ -65,7 +65,7 @@ public class TurmaController {
     }
 
     @PutMapping("/alterar/{id}")
-    public ResponseEntity<?> alterarTurma(@PathVariable Long id, TurmaDTO turmaDTO){
+    public ResponseEntity<?> alterarTurma(@PathVariable Long id, @RequestBody TurmaDTO turmaDTO){
         try {
             TurmaDTO turmaAlterada = turmaService.alterarTurma(id, turmaDTO);
             return ResponseEntity.status(HttpStatus.OK).body(turmaAlterada);
