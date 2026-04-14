@@ -26,6 +26,9 @@ public class InstrutorMapper {
      instrutorDTO.setCpf(instrutorModel.getCpf());
      instrutorDTO.setHorario(instrutorModel.getHorario());
      instrutorDTO.setNome(instrutorModel.getNome());
+     if (instrutorModel.getTurmas() != null && !instrutorModel.getTurmas().isEmpty()){
+         instrutorDTO.setIdTurma(instrutorModel.getTurmas().get(0).getId());
+     }
 
      return instrutorDTO;
  }
