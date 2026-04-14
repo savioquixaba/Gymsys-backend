@@ -20,6 +20,9 @@ public class TurmaMapper {
 
         turmaDTO.setId(turmaModel.getId());
         turmaDTO.setNome(turmaModel.getNome());
+        if (turmaModel.getInstrutor() != null){
+            turmaDTO.setIdInstrutor(turmaModel.getInstrutor().getId());
+        }
 
         return turmaDTO;
     }
