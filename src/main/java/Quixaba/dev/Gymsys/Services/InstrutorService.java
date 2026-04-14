@@ -25,12 +25,14 @@ public class InstrutorService {
     }
 
     public InstrutorDTO criarInstrutor(InstrutorDTO instrutorDTO){
-        TurmaModel turmaId = turmaRepository.findById(instrutorDTO.getIdTurma())
-                .orElseThrow(() -> new RuntimeException("Turma não existe, digite um ID de turma valido!"));
+
         InstrutorModel instrutor = instrutorMapper.mapToModel(instrutorDTO);
-        //transforma a lista em outra lista com um só indice
-        List<TurmaModel> lista = List.of(turmaId);
-        instrutor.setTurmas(lista);
+        if (instrutorDTO.getIdTurma() != null){
+            TurmaModel turmaId = turmaRepository.findById(instrutorDTO.getIdTurma())
+                    .orElseThrow(() -> new RuntimeException("Turma não existe, digite um ID de turma valido!"));
+            List<TurmaModel> lista = List.of(turmaId);
+            instrutor.setTurmas(lista);
+        }
         InstrutorModel salvo = instrutorRepository.save(instrutor);
         return instrutorMapper.mapToDto(salvo);
     }
