@@ -29,7 +29,9 @@ public class AlunoMapper {
         alunoDTO.setId(alunoModel.getId());
         alunoDTO.setNome(alunoModel.getNome());
         alunoDTO.setCpf(alunoModel.getCpf());
-
+        if (alunoModel.getTurma() != null){
+            alunoDTO.setTurmaId( alunoModel.getTurma().getId());
+        }
         alunoDTO.setMatricula(alunoModel.getMatricula());
         alunoDTO.setDataNascimento(alunoModel.getDataNascimento());
 
