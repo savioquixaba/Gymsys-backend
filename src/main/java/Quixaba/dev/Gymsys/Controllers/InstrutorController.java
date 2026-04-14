@@ -24,7 +24,7 @@ public class InstrutorController {
     public ResponseEntity<?> criarInstrutor(@RequestBody InstrutorDTO instrutorDTO){
         try {
             InstrutorDTO criar = instrutorService.criarInstrutor(instrutorDTO);
-            return ResponseEntity.status(HttpStatus.OK).body(instrutorDTO);
+            return ResponseEntity.status(HttpStatus.OK).body(criar);
         } catch (RuntimeException e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
         } catch (Exception e) {
@@ -52,7 +52,7 @@ public class InstrutorController {
             log.info("instrutor procurado: {}",listar);
             return ResponseEntity.status(HttpStatus.OK).body(listar);
         }catch (RuntimeException e) {
-            log.error("Instrutor não encontrado");
+            log.error("Instrutor não encontrado",e);
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
         }catch (Exception e){
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
