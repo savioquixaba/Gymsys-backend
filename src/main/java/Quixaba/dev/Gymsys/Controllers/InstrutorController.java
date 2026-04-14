@@ -60,13 +60,13 @@ public class InstrutorController {
     }
 
     @PutMapping("/alterar/{id}")
-    public ResponseEntity<?> alterarInstrutor(@PathVariable Long id, InstrutorDTO instrutorDTO){
+    public ResponseEntity<?> alterarInstrutor(@PathVariable Long id, @RequestBody InstrutorDTO instrutorDTO){
         try {
             InstrutorDTO alterado = instrutorService.alterarInstrutor(id,instrutorDTO);
             log.info("Id a ser alterado: {} ",id);
             return ResponseEntity.status(HttpStatus.OK).body(alterado);
         } catch (RuntimeException e) {
-            log.error("ID NÃO ENCONTRADO");
+            log.error("ID NÃO ENCONTRADO",e);
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
