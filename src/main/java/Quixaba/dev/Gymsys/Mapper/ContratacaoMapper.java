@@ -19,10 +19,15 @@ public class ContratacaoMapper {
     public ContratacaoDTO mapToDTO(ContratacaoModel contratacaoModel){
         ContratacaoDTO contratacaoDTO = new ContratacaoDTO();
 
-        contratacaoDTO.setId(contratacaoDTO.getId());
+        contratacaoDTO.setId(contratacaoModel.getId());
         contratacaoDTO.setDataInicio(contratacaoModel.getDataInicio());
         contratacaoDTO.setDataFinal(contratacaoModel.getDataFinal());
-
+        if (contratacaoModel.getAluno().getId() != null){
+            contratacaoDTO.setIdAluno(contratacaoModel.getAluno().getId());
+        }
+        if (contratacaoModel.getPlano().getId() != null){
+            contratacaoDTO.setIdPlano(contratacaoModel.getPlano().getId());
+        }
         return contratacaoDTO;
 
     }
